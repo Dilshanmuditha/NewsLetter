@@ -441,7 +441,7 @@
         <h1 class="justify-center text-4xl flex font-bold mb-20 mt-20 ">
             Latest <span class="text-green-500"> Updates of Information Technology </span> Field
         </h1>
-<!--  Category -->
+        <!--  Category -->
         <div class="relative lg:inline-flex items-center bg-green-100 rounded-xl">
 
             <x-category-dropdown>
@@ -458,20 +458,20 @@
                         {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
                     </button>
                 </x-slot>
-            <x-dropdown-category href="/">All Categories</x-dropdown-category>
+                <x-dropdown-category href="/">All Categories</x-dropdown-category>
                 @foreach($categories as $category)
 
                 <x-dropdown-category href="/categories/{{ $category->name }}">{{ucwords($category->name)}}</x-dropdown-category>
-                
+
 
                 @endforeach
             </x-category-dropdown>
 
         </div>
 
-<!--featured card -->
+        <!--featured card -->
         <div class="items-center">
-            <x-featured-card :post="$post[0]"  />
+            <x-featured-card :post="$post[0]" />
         </div>
         <div class="lg:grid lg:grid-cols-6">
             @foreach($post->skip(1) as $post)

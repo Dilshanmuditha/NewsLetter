@@ -9,9 +9,7 @@
         <div class="flex-1 flex flex-col justify-between">
             <header class="mt-8 lg:mt-0">
                 <div class="space-x-2">
-                   <x-category-button :category="$post->category" />
-
-
+                    <x-category-button :category="$post->category" />
                 </div>
 
                 <div class="mt-4">
@@ -23,7 +21,7 @@
 
                     <span class="mt-2 block text-blue-400 text-xs">
                         Published <time>
-{{$post->created_at->diffForHumans()}}
+                            {{$post->created_at->diffForHumans()}}
                         </time>
                     </span>
                 </div>
@@ -31,13 +29,11 @@
 
             <div class="text-sm mt-2">
                 <p>
-                 
+
                 <div class="space-y-4 lg:text-lg leading-loose">
                     {!!$post->excerpt!!}
                 </div>
-             
                 </p>
-
             </div>
 
             <footer class="flex justify-between items-center mt-8">
@@ -51,7 +47,9 @@
                 </div>
 
                 <div class=" lg:block">
-                    <a href="/post/{{$post->slug}}" class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-green-300 rounded-full py-2 px-8">Read More</a>
+                    <a href="/post/{{$post->slug}}" 
+                    class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-green-300 rounded-full py-2 px-8">
+                    Read More</a>
                 </div>
             </footer>
         </div>

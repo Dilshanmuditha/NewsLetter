@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
 use App\Models\category;
@@ -16,25 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $post = Post::latest();
-    return view('welcome',[
-        'post' => $post->paginate(5),
-        'categories'=> category::all()
-]);
-});
+
 
 /*Route::get('/dashboard', function (Post $post) {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');*/
 
 require __DIR__.'/auth.php';
-
-Route::get('/dashboard/create',function(){
-    return view('post-create');
-});
-
-Route::post('/admin/posts',[PostController::class,'store']);
-Route::get('/dashboard', [PostController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/', [PostController::class,'handle']);
+Route::post('/admin/posts',[AdminController::class,'store']);
 Route::get('post/{post:slug}',[PostController::class,'post']);
 Route::get('categories/{category:name}',[PostController::class,'category']);
+Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard/create',[AdminController::class,'dashboardCreate']);
+Route::post('posts/{post:slug}/comment', [PostCommentController::class, 'store']);
