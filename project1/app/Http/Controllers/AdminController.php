@@ -10,7 +10,7 @@ class AdminController extends Controller
     protected $postRepository;
 
     public function __construct(
-        PostRepository $postRepository,
+        PostRepository $postRepository
     ) {
         $this->postRepository = $postRepository;
     }
