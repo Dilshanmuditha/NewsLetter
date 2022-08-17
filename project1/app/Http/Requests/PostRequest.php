@@ -13,7 +13,7 @@ class PostRequest extends FormRequest
      */
     public function authorize()
     {
-        return redirect('/dashboard');
+        return true;
     }
 
     /**
