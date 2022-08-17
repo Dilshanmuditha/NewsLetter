@@ -11,7 +11,7 @@
         </div>
     </x-slot>
 
-    <x-dashboard-body :post="$post" />
+<x-dashboard-body :post="$post" />
 
 </x-app-layout>
 <x-footer />

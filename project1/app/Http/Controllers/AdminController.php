@@ -2,39 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Validation\Rule;
-use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
+use App\Repositories\PostRepository;
 
 class AdminController extends Controller
 {
+    protected $postRepository;
+
+    public function __construct(
+        PostRepository $postRepository,
+    ) {
+        $this->postRepository = $postRepository;
+    }
+
     public function dashboardCreate()
     {
         return view('post-create');
     }
+
     public function index()
     {
-        $post = Post::latest();
         return view('dashboard', [
-            'post' => Post::all()
+            'post' => $this->postRepository->getActive(),
         ]);
     }
-    public function store()
+
+    public function store(PostRequest $request)
     {
-        //dd($request->all());
-        $posts = new Post;
-        $attributes = request()->validate([
-            'title' => 'required',
-            'thumbnail' => 'required|image',
-            'slug' => ['required', Rule::unique('posts', 'slug')],
-            'excerpt' => 'required',
-            'body' => 'required'
-        ]);
+
+        $attributes = $request->input();
+
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
-        Post::create($attributes);
+        $this->postRepository->create($attributes);
+
         return redirect('/dashboard');
     }
 }
